@@ -1,6 +1,11 @@
 {
-    "name": "svelte-persist-runes",
+    "name": "svelte-persist-rune",
     "version": "0.0.1",
+    "description": "A custom rune in Svelte 5 that allows you to sync with browser storage.",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mokyabun/svelte-persist-rune.git"
+    },
     "scripts": {
         "dev": "vite dev",
         "build": "vite build && npm run package",
@@ -12,6 +17,7 @@
         "lint": "prettier --check . && eslint .",
         "format": "prettier --write ."
     },
+    "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "exports": {
@@ -48,6 +54,5 @@
         "typescript-eslint": "^8.0.0",
         "vite": "^5.0.11",
         "vitest": "^2.0.0"
-    },
-    "type": "module"
+    }
 }
