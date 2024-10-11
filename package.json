@@ -1,7 +1,8 @@
 {
     "name": "svelte-persist-rune",
     "version": "0.0.1",
-    "description": "A custom rune in Svelte 5 that allows you to sync with browser storage.",
+    "description": "A simple custom rune in Svelte 5 that syncs with browser storage.",
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/mokyabun/svelte-persist-rune.git"

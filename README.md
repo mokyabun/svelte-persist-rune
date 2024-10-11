@@ -1,6 +1,6 @@
 # svelte-persist-rune
 
-A custom rune in Svelte 5 that allows you to sync with browser storage. Based on [svelte-persisted-store](https://github.com/joshnuss/svelte-persisted-store)
+A custom rune in Svelte 5 that syncs with browser storage. Based on [svelte-persisted-store](https://github.com/joshnuss/svelte-persisted-store)
 
 ```bash
 npm i svelte-persist-rune
