@@ -31,7 +31,8 @@ In component
 Global state
 
 ```typescript
-export const theme = persist<'light' | 'dark'>('theme', 'dark')
+// use $effect.root
+export const theme = persist<'light' | 'dark'>('theme', 'dark', { root: true })
 ```
 
 ## License
