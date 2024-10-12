@@ -1,3 +1,6 @@
-import { persist } from '$lib'
+import { createLocalStorage, persist } from '$lib'
 
-export const global = persist('global', 0, { root: true })
+export const global = persist(createLocalStorage('global', 0), {
+    root: true,
+    syncTabs: true,
+})
