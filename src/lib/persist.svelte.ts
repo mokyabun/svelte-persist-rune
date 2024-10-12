@@ -1,4 +1,4 @@
-import type { PersistStorage } from './storages'
+import type { PersistStorage, PersistStorageEvent } from './storages'
 
 export interface CustomRune<T> {
     value: T
@@ -9,16 +9,7 @@ export interface PersistRune<T> extends CustomRune<T> {
     reset: () => void
 }
 
-export interface PersistOptions {
-    syncTabs?: boolean
-    root?: boolean
-}
-
-export function persist<T>(
-    storage: PersistStorage<T>,
-    options: PersistOptions = {},
-): PersistRune<T> {
-    const { syncTabs = false, root = false } = options
+export function persist<T>(storage: PersistStorage<T>, root: boolean = false): PersistRune<T> {
     const { set, initialValue, defaultValue, event } = storage
 
     let state = $state<T>(initialValue)
@@ -26,25 +17,26 @@ export function persist<T>(
     const syncWithStorage = () => {
         $effect(() => set(state))
     }
-    const listenStorage = (value: T) => (state = value)
+    const listenStorageEvent = (event?: PersistStorageEvent<T>) => {
+        if (event) {
+            return event((value) => {
+                state = value
+            })
+        }
+    }
 
     let cleanup = () => {}
     if (root) {
         cleanup = $effect.root(() => {
             syncWithStorage()
-
-            if (syncTabs) {
-                return event?.root ? event.root(listenStorage) : () => {}
-            }
+            return listenStorageEvent(event?.root)
         })
     } else {
         syncWithStorage()
 
-        if (syncTabs) {
-            $effect(() => {
-                return event?.component ? event.component(listenStorage) : () => {}
-            })
-        }
+        $effect(() => {
+            return listenStorageEvent(event?.component)
+        })
     }
 
     return {
