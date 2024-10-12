@@ -14,6 +14,6 @@ export async function createIdbStorage<T>(
             idbSet(key, value)
         },
         initialValue: (await idbGet<T>(key)) ?? initialValue,
-        rawInitialValue: initialValue,
+        defaultValue: initialValue,
     }
 }

@@ -49,7 +49,7 @@ With sync tabs
 
 ## Custom storage
 
-#### Custom storages are not tested!!
+#### This is just examples and they are not tested!!
 
 Cookie storage
 
@@ -73,15 +73,11 @@ export function createCookieStorage<T>(
     }
 
     return {
-        get,
-        set(value: T) {
+        set: (value: T) => {
             Cookies.set(key, JSON.stringify(value), options)
         },
-        remove() {
-            Cookies.remove(key)
-        },
         initialValue: get(),
-        rawInitialValue: initialValue,
+        defaultValue: initialValue,
     }
 }
 ```
@@ -106,7 +102,7 @@ export async function createIdbStorage<T>(
             idbSet(key, value)
         },
         initialValue: (await idbGet<T>(key)) ?? initialValue,
-        rawInitialValue: initialValue,
+        defaultValue: initialValue,
     }
 }
 

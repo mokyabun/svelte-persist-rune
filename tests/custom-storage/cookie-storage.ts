@@ -21,6 +21,6 @@ export function createCookieStorage<T>(
             Cookies.set(key, JSON.stringify(value), options)
         },
         initialValue: get(),
-        rawInitialValue: initialValue,
+        defaultValue: initialValue,
     }
 }
