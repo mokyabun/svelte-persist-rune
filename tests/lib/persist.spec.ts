@@ -8,24 +8,24 @@ describe('persist', () => {
         })
 
         it('should initialize with the correct value', () => {
-            const rune = persist(createLocalStorage('test', 0), { root: true })
+            const rune = persist(createLocalStorage('test', 0), true)
             expect(rune.value).toBe(0)
         })
 
         it('should set and get the value correctly', () => {
-            const rune = persist(createLocalStorage('test', 0), { root: true })
+            const rune = persist(createLocalStorage('test', 0), true)
             rune.value = 5
             expect(rune.value).toBe(5)
         })
 
         it('should load the value from storage', () => {
             localStorage.setItem('test', '10')
-            const rune = persist(createLocalStorage('test', 0), { root: true })
+            const rune = persist(createLocalStorage('test', 0), true)
             expect(rune.value).toBe(10)
         })
 
         it('should listen to storage changes', () => {
-            const rune = persist(createLocalStorage('test', 0), { root: true, syncTabs: true })
+            const rune = persist(createLocalStorage('test', 0, { syncTabs: true }), true)
 
             const event = new StorageEvent('storage', {
                 key: 'test',
