@@ -32,7 +32,7 @@ Global state
 
 ```typescript
 // use $effect.root
-const rune = persist(createLocalStorage('test', 0), { root: true })
+const rune = persist(createLocalStorage('test', 0), true)
 ```
 
 With sync tabs
@@ -41,7 +41,7 @@ With sync tabs
 <script>
     import { persist } from 'svelte-persist-rune'
 
-    const rune = persist(createLocalStorage('test', 0), { syncTabs: true })
+    const rune = persist(createLocalStorage('test', 0, { syncTabs: true }))
 </script>
 
 <p>{rune.value}</p>
