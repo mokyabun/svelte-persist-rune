@@ -1,6 +1,6 @@
 {
     "name": "svelte-persist-rune",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "A simple custom rune in Svelte 5 that syncs with browser storage.",
     "license": "MIT",
     "repository": {
