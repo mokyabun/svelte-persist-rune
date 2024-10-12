@@ -12,7 +12,7 @@ export interface PersistStorage<T> {
 
 export interface BrowserStorageOptions<T> {
     serialize?: (value: T) => string
-    deserialize?: (value: string | null) => T
+    deserialize?: (value: string | null, defaultValue: T) => T
     initialize?: (value: T) => T
     syncTabs?: boolean
 }
@@ -38,7 +38,8 @@ function createStorage<T>(
 
     const {
         serialize = JSON.stringify,
-        deserialize = (value: string | null) => (value ? JSON.parse(value) : defaultValue),
+        deserialize = (value: string | null, defaultValue: T) =>
+            value ? JSON.parse(value) : defaultValue,
         initialize = (value: any) => value,
         syncTabs = false,
     } = options
@@ -48,7 +49,7 @@ function createStorage<T>(
     const get = () => {
         const value = internalStorage.getItem(key)
 
-        return deserialize(value)
+        return deserialize(value, defaultValue)
     }
 
     return {
@@ -62,7 +63,7 @@ function createStorage<T>(
                           ensureRootListener()
 
                           const onStorageChange = (value: string | null) => {
-                              listener(deserialize(value))
+                              listener(deserialize(value, defaultValue))
                           }
 
                           addRootStorageListener(key, onStorageChange)
@@ -73,7 +74,7 @@ function createStorage<T>(
                           const onStorageChange = (event: StorageEvent) => {
                               if (event.key !== key) return
 
-                              listener(deserialize(event.newValue))
+                              listener(deserialize(event.newValue, defaultValue))
                           }
 
                           window.addEventListener('storage', onStorageChange)
